@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 340px;
+      font-family: Arial, sans-serif;
+      background: #1a1a2e;
+      color: #ffffff;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 18px;
+      color: #1d9e75;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 12px;
+      color: #888888;
+      margin-bottom: 16px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 16px;
+      border-bottom: 1px solid #333;
+    }
+
+    .tab {
+      padding: 8px 16px;
+      font-size: 13px;
+      color: #888888;
+      background: none;
+      border: none;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+    }
+
+    .tab.active {
+      color: #1d9e75;
+      border-bottom-color: #1d9e75;
+    }
+
+    .tab:hover {
+      color: #ffffff;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      color: #aaaaaa;
+      margin-bottom: 4px;
+      margin-top: 12px;
+    }
+
+    label:first-child {
+      margin-top: 0;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 8px 10px;
+      font-size: 13px;
+      background: #16213e;
+      border: 1px solid #333;
+      border-radius: 6px;
+      color: #ffffff;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #1d9e75;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    select {
+      cursor: pointer;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 16px;
+      transition: background 0.2s;
+    }
+
+    .btn-primary {
+      background: #1d9e75;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #167a5b;
+    }
+
+    .status {
+      font-size: 12px;
+      text-align: center;
+      margin-top: 8px;
+      min-height: 18px;
+    }
+
+    .status.success {
+      color: #1d9e75;
+    }
+
+    .status.error {
+      color: #e74c3c;
+    }
+
+    .shortcut-hint {
+      font-size: 11px;
+      color: #666666;
+      text-align: center;
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid #333;
+    }
+
+    .shortcut-key {
+      background: #16213e;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #aaaaaa;
+    }
+  </style>
+</head>
+<body>
+  <h1>PromptEnhancer</h1>
+  <p class="subtitle">Enhance your prompts in one click</p>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="persona">Persona</button>
+    <button class="tab" data-tab="api">API Settings</button>
+    <button class="tab" data-tab="about">About</button>
+  </div>
+
+  <!-- PERSONA TAB -->
+  <div id="tab-persona" class="tab-content active">
+    <label>Your Name</label>
+    <input type="text" id="persona-name" placeholder="e.g. Alex">
+
+    <label>Your Role</label>
+    <input type="text" id="persona-role" placeholder="e.g. Software Engineer">
+
+    <label>Your Company or School</label>
+    <input type="text" id="persona-company" placeholder="e.g. Google or Georgetown">
+
+    <label>Custom Instructions (optional)</label>
+    <textarea id="persona-instructions" placeholder="e.g. I prefer concise responses. My tech stack is React + Node.js. My manager's name is Sarah."></textarea>
+
+    <button class="btn btn-primary" id="save-persona">Save Persona</button>
+    <p class="status" id="persona-status"></p>
+  </div>
+
+  <!-- API SETTINGS TAB -->
+  <div id="tab-api" class="tab-content">
+    <label>AI Provider</label>
+    <select id="api-provider">
+      <option value="">None (use local engine only)</option>
+      <option value="gemini">Google Gemini (free tier available)</option>
+      <option value="openai">OpenAI (GPT)</option>
+      <option value="claude">Anthropic (Claude)</option>
+      <option value="ollama">Ollama (local)</option>
+    </select>
+
+    <label>API Key</label>
+    <input type="password" id="api-key" placeholder="Paste your API key here">
+
+    <label>Model (optional - uses default if empty)</label>
+    <input type="text" id="api-model" placeholder="e.g. gemini-2.0-flash, gpt-4o, claude-sonnet-4-20250514">
+
+    <button class="btn btn-primary" id="save-api">Save API Settings</button>
+    <p class="status" id="api-status"></p>
+  </div>
+
+  <!-- ABOUT TAB -->
+  <div id="tab-about" class="tab-content">
+    <p style="font-size:13px; color:#cccccc; line-height:1.6; margin-bottom:12px;">
+      PromptEnhancer transforms your short, vague prompts into detailed, expert-level prompts - right inside Claude, ChatGPT, and Gemini.
+    </p>
+    <p style="font-size:13px; color:#cccccc; line-height:1.6; margin-bottom:12px;">
+      <strong style="color:#1d9e75;">Local mode:</strong> Instant, free, uses smart templates. Click the Enhance button.
+    </p>
+    <p style="font-size:13px; color:#cccccc; line-height:1.6; margin-bottom:12px;">
+      <strong style="color:#1d9e75;">AI mode:</strong> Uses your API key for even better results. Click the dropdown arrow next to Enhance.
+    </p>
+    <p style="font-size:13px; color:#cccccc; line-height:1.6;">
+      <strong style="color:#1d9e75;">Your data stays local.</strong> API keys are stored in your browser only. Nothing is sent to us.
+    </p>
+  </div>
+
+  <div class="shortcut-hint">
+    Keyboard shortcut: <span class="shortcut-key">Ctrl+Shift+E</span>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
