@@ -4,7 +4,11 @@
 
 A Chrome Extension (Manifest V3) that intercepts user input in LLM chat interfaces and rewrites it before submission. Combines a deterministic rule-based NLP engine with optional LLM-powered meta-prompt enhancement across four provider backends. Zero dependencies, zero telemetry, zero external services — all core logic runs client-side with optional user-provided API credentials.
 
-![PromptEnhancer Demo](screenshots/demo.gif)
+### Before — you type a short prompt
+![Enhance Button](Screenshots/enhance_button.png)
+
+### After — one click transforms it
+![Enhanced Prompt](Screenshots/enhanced_prompt.png)
 
 ---
 
@@ -38,6 +42,13 @@ MutationObserver-based reconciliation handles dynamic page updates in these sing
 - No analytics SDK, no telemetry beacons, no third-party scripts
 - Content Security Policy compliant, Manifest V3 compliant
 - Fully open source — all code, prompts, and templates publicly inspectable in this repository
+
+### ⚙️ Easy Configuration
+Set up your persona and optionally connect your AI provider — all from the popup.
+
+| Persona | API Settings |
+|---------|-------------|
+| ![Popup Persona](Screenshots/Popup_Persona.png) | ![Popup API](Screenshots/Popup_API_Settings.png) |
 
 ---
 
