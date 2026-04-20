@@ -30,7 +30,7 @@
     }
   ],
 
-  "permissions": ["storage", "activeTab"],
+  "permissions": ["storage"],
 
   "host_permissions": [
     "https://api.anthropic.com/*",
