@@ -92,7 +92,7 @@ Input text + scraped chat history → Meta-prompt construction → Provider adap
 
 ### Option 1: Install from Chrome Web Store (coming soon)
 
-*The extension is currently in review. Install link will be added here once published.*
+https://chromewebstore.google.com/detail/promptenhancer/hnlohppfjbdpcfaadomcknkcdchegncc
 
 ### Option 2: Install manually (developer mode)
 
